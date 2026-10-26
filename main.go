@@ -4,6 +4,10 @@ import (
 	"database/sql"
 	"log"
 
+    "net/http"
+    "strconv"
+
+
 	"github.com/gin-gonic/gin"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -16,6 +20,19 @@ type Quiz struct {
 	Wrong2        string `json:"wrong2"`
 	Wrong3        string `json:"wrong3"`
 }
+
+type Tag struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
+}
+
+type Word struct {
+	ID      int      `json:"id"`
+	English string   `json:"english"`
+	Polish  string   `json:"polish"`
+	Tags    []string `json:"tags"`
+}
+
 
 var db *sql.DB
 
@@ -34,6 +51,15 @@ func main() {
 	r.GET("/app.js", func(c *gin.Context) {
 		c.File("./frontend/app.js")
 	})
+
+	r.GET("/quiz", func(c *gin.Context) {
+		c.File("./frontend/quiz.html")
+	})
+
+	r.GET("/flashcards", func(c *gin.Context) {
+		c.File("./frontend/flashcards.html")
+	})
+
 
 	api := r.Group("/api")
 	{
@@ -65,6 +91,118 @@ func main() {
 		})
 	}
 
+r.GET("/api/tags", func(c *gin.Context) {
+		rows, err := db.Query(`
+			SELECT id, name
+			FROM tags
+			ORDER BY name
+		`)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"error": "Nie udało się pobrać tagów",
+			})
+			return
+		}
+		defer rows.Close()
+
+		tags := []Tag{}
+
+		for rows.Next() {
+			var tag Tag
+			if err := rows.Scan(&tag.ID, &tag.Name); err != nil {
+				c.JSON(http.StatusInternalServerError, gin.H{
+					"error": "Nie udało się odczytać tagów",
+				})
+				return
+			}
+			tags = append(tags, tag)
+		}
+
+		if err := rows.Err(); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"error": "Błąd podczas odczytu tagów",
+			})
+			return
+		}
+
+		c.JSON(http.StatusOK, tags)
+	})
+
+	// Losowanie słówka przypisanego do wybranego tagu
+	r.GET("/api/words/random", func(c *gin.Context) {
+		tagID, err := strconv.Atoi(c.Query("tag_id"))
+		if err != nil || tagID <= 0 {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "Wybierz prawidłowy tag",
+			})
+			return
+		}
+
+		var word Word
+
+		err = db.QueryRow(`
+			SELECT w.id, w.english, w.polish
+			FROM words w
+			JOIN word_tags wt ON wt.word_id = w.id
+			WHERE wt.tag_id = ?
+			ORDER BY RANDOM()
+			LIMIT 1
+		`, tagID).Scan(&word.ID, &word.English, &word.Polish)
+
+		if err == sql.ErrNoRows {
+			c.JSON(http.StatusNotFound, gin.H{
+				"error": "Nie znaleziono słówek dla wybranego tagu",
+			})
+			return
+		}
+
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"error": "Nie udało się wylosować słówka",
+			})
+			return
+		}
+
+		// Pobierz wszystkie tagi wylosowanego słówka
+		rows, err := db.Query(`
+			SELECT t.name
+			FROM tags t
+			JOIN word_tags wt ON wt.tag_id = t.id
+			WHERE wt.word_id = ?
+			ORDER BY t.name
+		`, word.ID)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"error": "Nie udało się pobrać tagów słówka",
+			})
+			return
+		}
+		defer rows.Close()
+
+		word.Tags = []string{}
+
+		for rows.Next() {
+			var tagName string
+			if err := rows.Scan(&tagName); err != nil {
+				c.JSON(http.StatusInternalServerError, gin.H{
+					"error": "Nie udało się odczytać tagów słówka",
+				})
+				return
+			}
+			word.Tags = append(word.Tags, tagName)
+		}
+
+		if err := rows.Err(); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"error": "Błąd podczas odczytu tagów słówka",
+			})
+			return
+		}
+
+		c.JSON(http.StatusOK, word)
+	})
+
+	
 	r.Run(":8080")
 }
 
