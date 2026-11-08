@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test słownika</title>
+</head>
+<body>
+    <h1>Losowanie słówek</h1>
+
+    <label for="tagSelect">Wybierz tag:</label>
+    <select id="tagSelect">
+        <option value="">Ładowanie tagów...</option>
+    </select>
+
+    <button id="randomButton" type="button">Losuj</button>
+
+    <p id="message"></p>
+
+    <section id="wordResult" hidden>
+        <h2>Wylosowane słówko</h2>
+
+        <p>
+            <strong>Po polsku:</strong>
+            <span id="polishWord"></span>
+        </p>
+
+        <p>
+            <strong>Po angielsku:</strong>
+            <span id="englishWord"></span>
+        </p>
+
+        <p>
+            <strong>Tagi:</strong>
+            <span id="wordTags"></span>
+        </p>
+    </section>
+
+    <script src="/app.js"></script>
+</body>
+</html>
