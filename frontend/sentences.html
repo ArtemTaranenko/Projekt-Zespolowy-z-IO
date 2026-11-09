@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Układanie zdań · English practice</title>
+  <link rel="stylesheet" href="/sentences.css">
+  <script src="/sentences.js" defer></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/">English<span>practice</span></a><a href="/">← Słownik</a></header>
+  <main>
+    <div class="intro"><p class="eyebrow">ĆWICZENIA / ANGIELSKI</p><h1>Słowo po słowie.</h1><p>Ułóż angielskie tłumaczenie polskiego zdania.</p></div>
+    <section class="exercise" aria-labelledby="exercise-title">
+      <div class="exercise-heading"><h2 id="exercise-title">Układanie zdań</h2><span class="badge">PL → EN</span></div>
+      <p id="status" role="status" aria-live="polite">Ładowanie zdania…</p>
+      <div id="exercise-body" hidden>
+        <div class="prompt"><p class="label">PRZETŁUMACZ</p><p id="polish"></p></div>
+        <div class="answer-heading"><h3>Twoje zdanie</h3><span id="word-count">0 / 0 słów</span></div>
+        <div id="answer" class="word-area answer" role="group" aria-label="Wybrane słowa"></div>
+        <div class="bank-heading"><h3>Dostępne słowa</h3><p>Kliknij słowo, aby je dodać. Kliknij je ponownie w odpowiedzi, aby je odłożyć.</p></div>
+        <div id="bank" class="word-area bank" role="group" aria-label="Słowa do wyboru"></div>
+        <p class="hint">Użyj wszystkich słów. Oceniany jest wzorcowy szyk; wielkość liter nie ma znaczenia.</p>
+        <div id="feedback" role="status" aria-live="polite" hidden><strong id="feedback-title"></strong><p id="correct-answer"></p></div>
+      </div>
+      <div class="actions"><button id="check" class="primary" type="button" disabled>Sprawdź odpowiedź</button><button id="reset" type="button" disabled>Wyczyść</button><button id="next" class="next" type="button">Następne zdanie →</button></div>
+    </section>
+    <section class="progress" aria-label="Twój postęp"><div><span id="checked-count">0</span><p>sprawdzonych zdań</p></div><div><span id="correct-count">0</span><p>poprawnych odpowiedzi</p></div><p class="progress-note">Postęp zapisuje się tylko<br>w tej przeglądarce.</p></section>
+    <p id="storage-note" role="status" hidden>Przeglądarka nie pozwala zapisać postępu. Wyniki są dostępne tylko do zamknięcia strony.</p>
+  </main>
+  <footer>Mały krok. Kolejne zdanie.</footer>
+</body>
+</html>

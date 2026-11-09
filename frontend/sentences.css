@@ -1,0 +1,51 @@
+:root { color-scheme: light; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #27243a; background: #f6f5f1; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+a { color: #5543a8; text-underline-offset: 4px; }
+.topbar { max-width: 1040px; margin: auto; padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.brand { font-size: 19px; font-weight: 750; letter-spacing: -.7px; text-decoration: none; color: #27243a; }
+.brand span { color: #7060ac; margin-left: 4px; font-weight: 450; }
+.topbar > a:last-child { font-size: 14px; }
+main { max-width: 850px; padding: 22px 28px 0; margin: auto; }
+.eyebrow { font-size: 11px; font-weight: 750; letter-spacing: 2px; color: #796b93; }
+h1 { font-size: clamp(32px, 6vw, 48px); letter-spacing: -2px; line-height: 1.14; margin: 15px 0 12px; font-weight: 700; }
+.intro > p:last-child { color: #686471; font-size: 16px; line-height: 1.6; margin-bottom: 32px; }
+.exercise { background: #fff; border: 1px solid #e5e1eb; border-radius: 20px; padding: 28px 32px; box-shadow: 0 12px 40px #25203505; }
+.exercise-heading, .answer-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+h2 { font-size: 17px; margin: 0; font-weight: 650; }
+.badge { border-radius: 6px; padding: 6px 10px; font-size: 11px; font-weight: 700; letter-spacing: 1px; background: #f1eef9; color: #5a468e; white-space: nowrap; }
+#status { line-height: 1.6; color: #87502a; }
+.prompt { margin: 26px 0 28px; border-left: 3px solid #a599ce; padding: 2px 0 2px 18px; }
+.label { font-size: 10px; letter-spacing: 1.6px; color: #837c91; margin: 0 0 10px; font-weight: 700; }
+#polish { font-size: 23px; line-height: 1.4; margin: 0; font-weight: 550; }
+h3 { font-size: 13px; margin: 0; font-weight: 650; }
+#word-count { color: #777181; font-size: 12px; }
+.word-area { display: flex; gap: 8px; flex-wrap: wrap; align-content: flex-start; padding: 14px; min-height: 82px; }
+.answer { background: #faf9fd; border: 1px dashed #c7bfdc; border-radius: 12px; margin-top: 10px; }
+.placeholder { color: #948aab; font-size: 14px; padding: 8px 0; margin: 0; }
+.bank-heading { margin-top: 24px; }
+.bank-heading p { font-size: 12px; color: #797280; margin: 7px 0 4px; line-height: 1.6; }
+.bank { padding: 12px 0; min-height: 64px; }
+button { font: inherit; font-size: 13px; border: 1px solid #ddd7e8; border-radius: 9px; background: #fff; color: #40374e; cursor: pointer; padding: 12px 15px; transition: background .15s, border-color .15s; }
+button:hover:not(:disabled) { background: #f1edf9; border-color: #b2a3cf; }
+button:focus-visible, a:focus-visible { outline: 3px solid #8067c2; outline-offset: 3px; }
+button:disabled { cursor: default; opacity: .5; }
+.word { font-size: 16px; padding: 10px 17px; box-shadow: 0 2px 0 #e5dfed; overflow-wrap: anywhere; max-width: 100%; }
+.answer .word { color: #513a89; background: #ede7f8; border-color: #d5c8ec; }
+.hint { color: #857d8e; font-size: 11px; line-height: 1.6; margin: 10px 0 0; }
+.actions { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; border-top: 1px solid #eeeaf3; padding-top: 22px; margin-top: 22px; }
+.primary { background: #6346a5; color: #fff; border-color: #6346a5; }
+.primary:hover:not(:disabled) { background: #50358c; color: #fff; }
+.next { margin-left: auto; color: #5b4493; border-color: transparent; }
+#feedback { margin-top: 22px; border-radius: 10px; padding: 15px 18px; line-height: 1.6; font-size: 14px; }
+#feedback.success { background: #edf6ed; color: #29623a; }
+#feedback.incorrect { background: #fff4e5; color: #85511b; }
+#feedback p { margin: 4px 0 0; }
+.progress { display: flex; align-items: center; gap: 35px; padding: 26px 18px; }
+.progress span { font-size: 24px; font-weight: 650; }
+.progress p { font-size: 11px; color: #7e7588; margin: 3px 0 0; }
+.progress .progress-note { margin-left: auto; line-height: 1.7; }
+#storage-note { font-size: 12px; color: #885821; }
+footer { text-align: center; margin: 25px 0 28px; color: #9b939e; font-size: 11px; }
+@media (max-width: 550px) { .topbar { padding: 22px; } main { padding: 15px 16px 0; } .exercise { padding: 23px 19px; } #polish { font-size: 20px; } .actions { gap: 8px; } .next { margin-left: 0; } .progress { gap: 22px; flex-wrap: wrap; } .progress .progress-note { margin-left: 0; } }

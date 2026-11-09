@@ -11,6 +11,7 @@ import (
 
 func main() {
 	seed := flag.Bool("seed", false, "Dodaj przykładowe quizy do pustej tabeli")
+	seedSentences := flag.Bool("seed-sentences", false, "Dodaj przykładowe zdania do pustej tabeli")
 	flag.Parse()
 	database, err := db.Open("./db/data.db")
 	if err != nil {
@@ -19,6 +20,11 @@ func main() {
 	defer database.Close()
 	if *seed {
 		if err := db.Seed(database); err != nil {
+			log.Fatal(err)
+		}
+	}
+	if *seedSentences {
+		if err := db.SeedSentences(database); err != nil {
 			log.Fatal(err)
 		}
 	}

@@ -41,6 +41,9 @@ func Open(path string) (*sql.DB, error) {
 	if err == nil {
 		err = initVocabulary(database)
 	}
+	if err == nil {
+		err = initSentences(database)
+	}
 	if err != nil {
 		database.Close()
 		return nil, fmt.Errorf("inicjalizacja SQLite: %w", err)

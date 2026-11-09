@@ -21,6 +21,9 @@ func newRouter(database *sql.DB) *gin.Engine {
 	r.GET("/app.js", func(c *gin.Context) { c.File("./frontend/app.js") })
 	r.GET("/quiz", func(c *gin.Context) { c.File("./frontend/quiz.html") })
 	r.GET("/flashcards", func(c *gin.Context) { c.File("./frontend/flashcards.html") })
+	r.GET("/sentences", func(c *gin.Context) { c.File("./frontend/sentences.html") })
+	r.GET("/sentences.js", func(c *gin.Context) { c.File("./frontend/sentences.js") })
+	r.GET("/sentences.css", func(c *gin.Context) { c.File("./frontend/sentences.css") })
 	h := handlers{database: database}
 	api := r.Group("/api")
 	api.GET("/tags", h.tags)
@@ -28,7 +31,8 @@ func newRouter(database *sql.DB) *gin.Engine {
 	api.GET("/health", h.health)
 	api.GET("/quiz/random", h.randomQuiz)
 	// Kontrakty tras dla następnych etapów. Nie zgłaszają pozornego sukcesu.
-	api.GET("/sentences/random", notImplemented)
+	api.GET("/sentences/random", h.randomSentence)
+	api.POST("/sentences/check", h.checkSentence)
 	api.GET("/flashcards/random", notImplemented)
 	api.POST("/flashcards", notImplemented)
 	return r
