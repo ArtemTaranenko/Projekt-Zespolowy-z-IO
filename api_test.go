@@ -31,7 +31,7 @@ func TestRoutes(t *testing.T) {
 	}{
 		{"GET", "/api/health", 200, ""},
 		{"GET", "/api/quiz/random", 404, "QUIZ_NOT_FOUND"},
-		{"GET", "/api/sentences/random", 501, "NOT_IMPLEMENTED"},
+		{"GET", "/api/sentences/random", 404, "SENTENCE_NOT_FOUND"},
 		{"GET", "/api/flashcards/random", 501, "NOT_IMPLEMENTED"},
 		{"POST", "/api/flashcards", 501, "NOT_IMPLEMENTED"},
 		{"POST", "/api/quiz/random", 405, "METHOD_NOT_ALLOWED"},
