@@ -134,7 +134,7 @@ func TestSentenceSeedAndExistingData(t *testing.T) {
 	if _, err := database.Exec(`INSERT INTO words (english,polish) VALUES ('cat','kot'); INSERT INTO tags(name) VALUES ('Animals'); INSERT INTO word_tags(word_id,tag_id) VALUES (1,1)`); err != nil {
 		t.Fatal(err)
 	}
-	if err := db.Seed(database); err != nil {
+	if err := db.SeedQuizzes(database); err != nil {
 		t.Fatal(err)
 	}
 	for i := 0; i < 2; i++ {
@@ -148,7 +148,7 @@ func TestSentenceSeedAndExistingData(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer database.Close()
-	for table, want := range map[string]int{"sentences": 10, "quizzes": 3, "words": 1, "tags": 1, "word_tags": 1} {
+	for table, want := range map[string]int{"sentences": 10, "quizzes": 30, "words": 1, "tags": 1, "word_tags": 1} {
 		var count int
 		if err := database.QueryRow("SELECT COUNT(*) FROM " + table).Scan(&count); err != nil {
 			t.Fatal(err)

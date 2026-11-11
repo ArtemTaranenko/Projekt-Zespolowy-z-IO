@@ -20,6 +20,8 @@ func newRouter(database *sql.DB) *gin.Engine {
 	r.GET("/style.css", func(c *gin.Context) { c.File("./frontend/style.css") })
 	r.GET("/app.js", func(c *gin.Context) { c.File("./frontend/app.js") })
 	r.GET("/quiz", func(c *gin.Context) { c.File("./frontend/quiz.html") })
+	r.GET("/quiz.js", func(c *gin.Context) { c.File("./frontend/quiz.js") })
+	r.GET("/quiz.css", func(c *gin.Context) { c.File("./frontend/quiz.css") })
 	r.GET("/flashcards", func(c *gin.Context) { c.File("./frontend/flashcards.html") })
 	r.GET("/sentences", func(c *gin.Context) { c.File("./frontend/sentences.html") })
 	r.GET("/sentences.js", func(c *gin.Context) { c.File("./frontend/sentences.js") })
@@ -30,6 +32,7 @@ func newRouter(database *sql.DB) *gin.Engine {
 	api.GET("/words/random", h.randomWord)
 	api.GET("/health", h.health)
 	api.GET("/quiz/random", h.randomQuiz)
+	api.POST("/quiz/check", h.checkQuiz)
 	// Kontrakty tras dla następnych etapów. Nie zgłaszają pozornego sukcesu.
 	api.GET("/sentences/random", h.randomSentence)
 	api.POST("/sentences/check", h.checkSentence)

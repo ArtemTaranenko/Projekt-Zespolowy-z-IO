@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quiz · English practice</title>
+    <link rel="stylesheet" href="/sentences.css">
+    <link rel="stylesheet" href="/quiz.css">
+    <script src="/quiz.js" defer></script>
+</head>
+
+<body>
+    <header class="topbar">
+        <a class="brand" href="/">English<span>practice</span></a>
+        <nav class="topbar-links" aria-label="Nawigacja ćwiczeń">
+            <a href="/sentences">Układanie zdań →</a>
+            <a href="/">← Słownik</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="intro">
+            <p class="eyebrow">ĆWICZENIA / ANGIELSKI</p>
+            <h1>Sprawdź swoją wiedzę.</h1>
+            <p>Wybierz poprawną odpowiedź i sprawdź swój wynik.</p>
+        </div>
+
+        <section class="exercise" aria-labelledby="exercise-title">
+            <div class="exercise-heading">
+                <h2 id="exercise-title">Quiz gramatyczny</h2>
+                <span class="badge">QUIZ</span>
+            </div>
+
+            <p id="status" role="status" aria-live="polite">Ładowanie pytania…</p>
+
+            <div id="exercise-body" hidden>
+                <div class="prompt">
+                    <p class="label">UZUPEŁNIJ ZDANIE</p>
+                    <p id="question"></p>
+                </div>
+
+                <div id="answers" class="answers" role="group" aria-label="Odpowiedzi"></div>
+
+                <div id="feedback" role="status" aria-live="polite" hidden>
+                    <strong id="feedback-title"></strong>
+                    <p id="correct-answer"></p>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button id="check" class="primary" type="button" disabled>
+                    Sprawdź odpowiedź
+                </button>
+                <button id="next" class="next" type="button">
+                    Następne pytanie →
+                </button>
+            </div>
+        </section>
+
+        <section class="progress" aria-label="Twój postęp">
+            <div>
+                <span id="checked-count">0</span>
+                <p>sprawdzonych pytań</p>
+            </div>
+            <div>
+                <span id="correct-count">0</span>
+                <p>poprawnych odpowiedzi</p>
+            </div>
+            <p class="progress-note">
+                Postęp zapisuje się tylko<br>
+                w tej przeglądarce.
+            </p>
+        </section>
+
+        <p id="storage-note" role="status" hidden>
+            Nie udało się zapisać postępu.
+        </p>
+    </main>
+
+    <footer>Mały krok. Kolejne pytanie.</footer>
+</body>
+
+</html>

@@ -19,7 +19,7 @@ func main() {
 	}
 	defer database.Close()
 	if *seed {
-		if err := db.Seed(database); err != nil {
+		if err := db.SeedQuizzes(database); err != nil {
 			log.Fatal(err)
 		}
 	}
